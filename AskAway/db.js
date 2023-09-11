@@ -4,9 +4,9 @@ const {idleTimeoutMillis} = require("pg/lib/defaults");
 var bcrypt = require('bcrypt');
 
 var config ={
-    user: 'tojxtfas', //env var: PGUSER
-    database: 'tojxtfas', //env var: PGDATABASE
-    password: 'b7VX13F-J1pv0QS-SXb1l3TMtz1NauCz', //env var: PGPASSWORD
+    user: 'tojxtfass', //env var: PGUSER
+    database: 'tojxtfass', //env var: PGDATABASE
+    password: 'b7VX13F-J1pv0QS-SXb1l3TMtz1NauCzs', //env var: PGPASSWORD
     host: 'mouse.db.elephantsql.com', // Server hosting the postgres database
     port: 5432, //env var: PGPORT
     max: 100, // max number of clients in the pool
