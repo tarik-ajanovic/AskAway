@@ -1,0 +1,30 @@
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="myblock" style="width: 500px">
+                <h2>Create a AskAway Account</h2>
+                <form class="justify-content-center align-items-center" method="post" action="/signup">
+                    <% if (!(typeof error === 'undefined')) {%> <!-- Gleda da li je error prosljedjen -->
+                    <div class="alert alert-danger alert-dismissible fade show" role="alert" id="taken">
+                        The username or e-mail you have entered is already taken!
+                    </div>
+                    <%}%>
+                    <div class="row">
+                        <input id="fname" name="fname" class="col form-control rounded-pill m-2" type="text" placeholder="First Name" required>
+                        <input id="lname" name="lname" class="col form-control rounded-pill m-2" type="text" placeholder="Last Name" required>
+                    </div>
+                    <input id="profession" name="profession" class="form-control rounded-pill my-2" type="text" placeholder="Profession">
+                    <input id="email" name="email" class="form-control rounded-pill my-2" type="email" placeholder="Email" required>
+                    <input id="username" name="username" class="form-control rounded-pill my-2" type="text" placeholder="Username" required>
+                    <input id="password" name="password" class="form-control rounded-pill my-2" type="password" placeholder="Password" required>
+                    <button type="submit" class="btn rounded-pill btn-secondary my-2">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+

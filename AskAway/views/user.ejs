@@ -1,0 +1,64 @@
+<head>
+    <!--<link rel='stylesheet' href='/stylesheets/index.css' /> -->
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col">
+            <a href="/admin/users"><button class="btn btn-primary rounded-pill my-1">Users</button></a>
+        </div>
+        <div class="col">
+            <a href="/admin/presentations"><button class="btn btn-primary rounded-pill my-1">Presentations</button></a>
+        </div>
+    </div>
+    <div class="myblock m-3">
+        <h2>Edit User</h2>
+        <form class="justify-content-center align-items-center" method="post" action="/admin/user/<%=useradmin[0].id%>">
+            <table class="table table-responsive">
+                <tr class="text-center">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Profession</th>
+                    <th>E-Mail</th>
+                    <th>Username</th>
+                </tr>
+                <tr>
+                    <td><input id="fname" name="fname" class="col form-control rounded-pill" type="text" placeholder="First Name" value="<%=useradmin[0].first_name%>" required></td>
+                    <td><input id="lname" name="lname" class="col form-control rounded-pill" type="text" placeholder="Last Name" value="<%=useradmin[0].last_name%>" required></td>
+                    <td><input id="profession" name="profession" class="form-control rounded-pill" type="text" placeholder="Profession" value="<%=useradmin[0].title%>"></td>
+                    <td><input id="email" name="email" class="form-control rounded-pill" type="email" placeholder="Email" value="<%=useradmin[0].email%>" required></td>
+                    <td><input id="username" name="username" class="form-control rounded-pill" type="text" placeholder="Username" value="<%=useradmin[0].username%>" required></td>
+                </tr>
+            </table>
+            <button type="submit" class="btn rounded-pill btn-secondary my-2">Edit User</button>
+        </form>
+    </div>
+    <div class="row myblock mx-3">
+        <h2 style="display: inline">User's Presentations</h2>
+        <table class="table table-responsive">
+            <thead class="table">
+            <tr>
+                <th>Title</th>
+                <th>Code</th>
+                <th>Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let i = 0; i < userspresentations.length; i++){%>
+                <tr>
+                    <td><%= userspresentations[i].title%></td>
+                    <td><%= userspresentations[i].code%></td>
+                    <td><%= userspresentations[i].start_date.toLocaleString("en-GB", {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })%></td>
+                    <td><a href="/admin/presentation/<%=userspresentations[i].presentation_id%>"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="/admin/presentation/delete/<%=userspresentations[i].presentation_id%>"><i class="bi bi-trash-fill"></i></a></td>
+                </tr>
+            <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+

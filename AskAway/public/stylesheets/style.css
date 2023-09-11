@@ -1,0 +1,96 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: ghostwhite;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #3c3c3c;
+}
+
+#askaway {
+  font-family: 'Lobster', sans-serif;
+  color: #3871EB;
+}
+
+.myblock {
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+  border-style: solid;
+  border-color: lightgrey;
+  border-width: 1px;
+}
+
+footer a {
+  font-family: 'Lobster', sans-serif;
+  color: #3871EB;
+  text-decoration: none;
+  font-size: x-large;
+}
+
+footer a:hover {
+  color: #EB9650;
+  text-shadow: 1px 1px #3871EB;
+}
+
+header  {
+  background-color: #3871EB;
+}
+
+header a {
+  font-family: 'Lobster', sans-serif;
+  color: white;
+  text-decoration: none;
+  font-size: xx-large;
+  margin: 1px;
+  padding: 1px;
+}
+
+header a:hover {
+  color: #EB9650;
+}
+
+.btn-primary {
+  background-color: #3871EB;
+  border-color: #3871EB;
+}
+
+.btn-primary:hover {
+  background-color: #6844EB;
+  border-color: #6844EB;
+  color: white;
+}
+
+.btn-secondary {
+  background-color: #EB9650;
+  border-color: #EB9650;
+}
+
+.btn-secondary:hover{
+  background-color: #6844EB;
+  border-color: #6844EB;
+}
+
+body{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+footer{
+  margin-top: auto;
+}
+
+a {
+  text-decoration: none;
+  color: #3871EB;
+}
+
+a:active {
+  text-decoration: none;
+  color: #EB9650;
+}
+
+i {
+  color: #3871EB;
+}
+

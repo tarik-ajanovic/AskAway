@@ -1,0 +1,94 @@
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-3 mx-3">
+        <h1>Welcome to your Dashboard <%= user.first_name %></h1>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <div class="myblock">
+                <h3 class="me-1" style="display: inline"><%= user.first_name+" "+user.last_name%></h3>
+                <%="@"+user.username %> <br>
+                <h5><%= user.title %></h5>
+                <%= user.email %> <br>
+                <%= presentations.length %> upcoming presentations
+                <br>
+                <a href="/logout"><button class="btn btn-primary rounded-pill my-1" type="submit">Log Out</button></a>
+            </div>
+            <div class="myblock my-3">
+                <h4>Forbidden Words</h4>
+                <form method="post" action="/home/forbidden">
+                    <textarea name="forbidden" id="forbidden" class="form-control"><%=user.forbidden_words%></textarea>
+                    <button type="submit" class="btn rounded-pill btn-secondary my-2">Edit</button>
+                </form>
+            </div>
+        </div>
+        <div class="col-6">
+            <div class="row myblock">
+                <h2 class="me-1" style="display: inline">Upcoming Presentations</h2>
+                <table class="table table-responsive">
+                    <thead class="table">
+                        <tr class="text-center">
+                            <th>Title</th>
+                            <th>Access Code</th>
+                            <th>Start Date</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% for (let i = 0; i < presentations.length; i++){%>
+                                <tr>
+                                    <td><a href="/presentation/<%= presentations[i].code%>"><%= presentations[i].title%></a></td>
+                                    <td class="text-center"><%= presentations[i].code%></td>
+                                    <td><%= presentations[i].start_date.toLocaleString("en-GB", {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })%></td>
+                                    <td><a href="/presentation/share/<%= presentations[i].code%>"><i class="bi bi-share-fill"></i></a></td>
+                                </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+                <% if (pastpresentations.length > 0) {%>
+                <h2 class="me-1 mt-3" style="display: inline">Past Presentations</h2>
+                <table class="table table-responsive">
+                    <thead class="table">
+                    <tr class="text-center">
+                        <th>Title</th>
+                        <th>Access Code</th>
+                        <th>Start Date</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <% for (let i = 0; i < pastpresentations.length; i++){%>
+                            <tr>
+                                <td><a href="/presentation/<%= pastpresentations[i].code%>"><%= pastpresentations[i].title%></a></td>
+                                <td class="text-center"><%= pastpresentations[i].code%></td>
+                                <td><%= pastpresentations[i].start_date.toLocaleString("en-GB", {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })%></td>
+                            </tr>
+                    <%}%>
+                    </tbody>
+                </table>
+                <%}%>
+            </div>
+        </div>
+        <div class="col-3">
+            <div class="myblock">
+                <h3 class="me-1">Schedule A New Presentation</h3>
+                <% if (message == "Invalid code") {%> <!-- Gleda da li je error prosljedjen -->
+                <<div class="alert alert-danger alert-dismissible fade show" role="alert" id="taken">
+                    <%= message %>
+                </div>
+                <%}%>
+                <form method="post" action="/presentation/upload">
+                    <input id="title" name="title" class="form-control rounded-pill my-2" type="text" placeholder="Title" required>
+                    <input id="code" name="code" class="form-control rounded-pill my-2" type="text" placeholder="Presentation Code" required>
+                    <input id="start_date" name="start_date" class="form-control rounded-pill my-2" type="datetime-local" placeholder="Start Time" required>
+
+                    <button type="submit" class="btn rounded-pill btn-secondary my-2">Schedule</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+

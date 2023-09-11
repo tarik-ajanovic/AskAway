@@ -1,0 +1,80 @@
+<head>
+    <title><%= presentation.p_title %></title>
+    <script src="/socket.io/socket.io.js"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-3">
+        <div class="col-3">
+            <!-- PRESENTATION INFO -->
+            <h1><%= presentation.p_title %></h1>
+            <h2>Join Code: <%= presentation.code%></h2>
+            <div class="myblock">
+                <h3><i class="bi bi-calendar-fill"></i> <%= presentation.start_date.toLocaleString("en-GB", {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })%></h3>
+                <h6 style="display: inline"><i class="bi bi-person-fill"></i></h6> <h4 style="display: inline"> <%= presentation.first_name+" "+presentation.last_name%></h4>
+                <h6><i class="bi bi-briefcase-fill"></i> <%= presentation.presenter_title %></h6>
+            </div>
+        </div>
+        <div class="col-6" >
+            <!-- QUESITON AREA -->
+            <h3 class="me-1">Asked Questions</h3>
+            <%if (not_yet){ %>
+                <h1 class="text-center my-5">The presentation hasn't started yet</h1>
+                <%}%>
+            <div id="questionArea">
+            </div>
+        </div>
+        <div class="col-3">
+            <!-- ASK A QUESTION -->
+            <div class="myblock">
+                <h3 class="me-1">Ask A Question</h3>
+                <% if (presentation.p_title == "You message contains forbidden words") {%> <!-- Gleda da li je error prosljedjen -->
+                <<div class="alert alert-danger alert-dismissible fade show" role="alert" id="taken">
+                    <%= message %>
+                </div>
+                <%}%>
+                <textarea id="question_content" class="form-control" placeholder="Enter your question..."></textarea>
+                <input id="askbtn" type="button" class="btn rounded-pill btn-secondary my-2" onclick="sendQuestion()" value="Ask">
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    //document.getElementById("askbtn").disabled=true;
+    var socket = io.connect('ws://localhost:3000');
+
+    //kad dobije klijent poruku od servera (tj. neko drugi postavio pitanje)
+    socket.on('server_question', function (questions){
+        console.log('dobio server questions');
+        document.getElementById("questionArea").innerHTML = "";
+        for(let i = 0; i < questions.length; i++){
+            console.log(questions[i])
+            if (questions[i].answered === false){
+                document.getElementById("questionArea").innerHTML += `
+                <div class="myblock my-1">
+                    <p>${questions[i].text}</p>
+                    <div class="row justify-content-between align-items-end">
+                        <div class="col"><i class="bi bi-heart-fill" style="color: #EB9650;"></i> ${questions[i].likes}</div>
+                        <div class="col text-end">
+                        <button id="${questions[i].question_id}" class="btn rounded-pill btn-primary my-2"><i class="bi bi-heart-fill" onclick="like(${questions[i].question_id})" style="color: #EB9650;"></i></button>
+                        </div>
+                    </div>
+                </div>`;
+        }
+    }
+    })
+
+    function like(question_id){
+        socket.emit('question_like', question_id);
+        document.getElementById(`${question_id}`).disabled = true;
+    }
+
+    function sendQuestion() {
+        let questionContent = document.getElementById('question_content').value;
+        socket.emit('client_question', questionContent);
+        document.getElementById('question_content').value = "";
+    }
+
+</script>
+</body>
+

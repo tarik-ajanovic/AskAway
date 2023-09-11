@@ -1,0 +1,70 @@
+<head>
+    <!--<link rel='stylesheet' href='/stylesheets/index.css' /> -->
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-3 mx-3">
+        <h1>Welcome to the Admin Dashboard</h1>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <a href="/admin/users"><button class="btn btn-primary rounded-pill my-1">Users</button></a>
+        </div>
+        <div class="col">
+            <a href="/admin/presentations"><button class="btn btn-primary rounded-pill my-1">Presentations</button></a>
+        </div>
+    </div>
+    <div class="myblock m-3">
+        <h2>Add a User</h2>
+        <form class="justify-content-center align-items-center" method="post" action="/admin/users">
+            <% if (!(typeof error === 'undefined')) {%> <!-- Gleda da li je error prosljedjen -->
+            <div class="alert alert-danger alert-dismissible fade show" role="alert" id="taken">
+                The username or e-mail you have entered is already taken!
+            </div>
+            <%}%>
+            <table class="table table-responsive">
+                <tr>
+                    <td><input id="fname" name="fname" class="col form-control rounded-pill" type="text" placeholder="First Name" required></td>
+                    <td><input id="lname" name="lname" class="col form-control rounded-pill" type="text" placeholder="Last Name" required></td>
+                    <td><input id="profession" name="profession" class="form-control rounded-pill" type="text" placeholder="Profession"></td>
+                    <td><input id="email" name="email" class="form-control rounded-pill" type="email" placeholder="Email" required></td>
+                    <td><input id="username" name="username" class="form-control rounded-pill" type="text" placeholder="Username" required></td>
+                    <td><input id="password" name="password" class="form-control rounded-pill" type="password" placeholder="Password" required></td>
+                </tr>
+            </table>
+            <button type="submit" class="btn rounded-pill btn-secondary my-2">Add User</button>
+        </form>
+    </div>
+    <div class="row myblock mx-3">
+        <h2 style="display: inline">Users</h2>
+        <table class="table table-responsive">
+            <thead class="table">
+            <tr>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Profession</th>
+                <th>Username</th>
+                <th>E-mail</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let i = 0; i < users.length; i++){%>
+                <tr>
+                    <td><%= users[i].first_name%></td>
+                    <td><%= users[i].last_name%></td>
+                    <td><%= users[i].title%></td>
+                    <td><%= users[i].username%></td>
+                    <td><%= users[i].email%></td>
+                    <td><a href="/admin/user/<%=users[i].id%>"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="/admin/delete/<%=users[i].id%>"><i class="bi bi-trash-fill"></i></a></td>
+                </tr>
+            <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+

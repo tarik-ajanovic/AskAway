@@ -1,0 +1,48 @@
+<head>
+    <link rel='stylesheet' href='/stylesheets/index.css' />
+    <title><%= title %></title>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center align-items-center" style="margin-top: 50px">
+            <div class="col">
+                <h1>AskAway</h1>
+                <h2>Welcome to <span id="askaway">AskAway</span>, a place where all questions are welcome</h2>
+
+            </div>
+            <div class="col myblock">
+                <form class=" justify-content align-items-center" method="post" action="/login">
+                    <h3>Log in to you Presenter Account</h3>
+                    <% if (messages.error) {%> <!-- Gleda da li je error prosljedjen -->
+                    <<div class="alert alert-danger alert-dismissible fade show" role="alert" id="taken">
+                        <%= messages.error %>
+                    </div>
+                    <%}%>
+                    <input class="form-control rounded-pill my-1 w-75" type="text" placeholder="Username" id="loginUsername" name="username">
+                    <input class="form-control rounded-pill my-1 w-75" type="password" placeholder="Password" id="loginPassword" name="password">
+                    <button class="btn btn-primary rounded-pill my-1" type="submit">Log In</button><br>
+                </form>
+                <a href="/signup"><button class="btn rounded-pill btn-secondary my-1">Create A Presenter Account</button></a><br>
+
+                    <small>Already have the presentation code? Enter it bellow</small><br>
+                    <input id="code" class="form-control rounded-pill my-1 w-75" type="text" placeholder="Enter the code here">
+                    <button class="btn btn-primary rounded-pill my-1" onclick="location.href = '/presentation/'+document.getElementById('code').value;">Enter</button>
+            </div>
+        </div>
+        <div class="row mt-10" style="margin-top: 50px;">
+            <h4>For the Presenters</h4>
+            <p>AskAway is a website that allows users to create and participate in interactive Q&A sessions and polls.
+                It is commonly used for conferences, meetings, and events to facilitate audience engagement and gather feedback.
+                If you are a presenter at an event, register now and share the generated session code with your audience.
+                Once they enter they will be able to post their questions and like others' questions.
+                You choose which questions you want to answer.</p>
+            <h4>For the Audience</h4>
+            <p>
+                If you are a member of the audience, simply enter the session code provided to you by the presenter.
+                After entering the session you are free to ask the presenter a question and interact with others' questions
+                by liking them which boosts the question to the top of the presenter's list.
+            </p>
+        </div>
+    </div>
+</body>
+

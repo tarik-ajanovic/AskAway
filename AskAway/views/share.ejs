@@ -1,0 +1,19 @@
+<head>
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container-fluid">
+    <h1 class="text-center my-3">Use the code below to join</h1>
+    <h1 class="text-center my-3" style="font-size: 18vw;"><%=presentation.code%></h1>
+
+
+    <div class="myblock m-3">
+        <h2>Send out invites</h2>
+        <form method="post" action="/presentation/share/<%=presentation.code%>">
+            <textarea class="form-control" name="mailingList" placeholder="Enter e-mails separated by a ,"></textarea>
+            <button type="submit" class="btn rounded-pill btn-secondary my-2">Send Invites</button>
+        </form>
+    </div>
+</div>
+</body>
+

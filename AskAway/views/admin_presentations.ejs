@@ -1,0 +1,46 @@
+<head>
+    <!--<link rel='stylesheet' href='/stylesheets/index.css' /> -->
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row mt-3 mx-3">
+        <h1>Welcome to the Admin Dashboard</h1>
+    </div>
+    <div class="row text-center">
+        <div class="col">
+            <a href="/admin/users"><button class="btn btn-primary rounded-pill my-1">Users</button></a>
+        </div>
+        <div class="col">
+            <a href="/admin/presentations"><button class="btn btn-primary rounded-pill my-1">Presentations</button></a>
+        </div>
+    </div>
+
+    <div class="row myblock mx-3">
+        <h2 style="display: inline">Presentations</h2>
+        <table class="table table-responsive">
+            <thead class="table">
+            <tr>
+                <th>Title</th>
+                <th>Code</th>
+                <th>Start Date</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (let i = 0; i < presentations.length; i++){%>
+                <tr>
+                    <td><%= presentations[i].title%></td>
+                    <td><%= presentations[i].code%></td>
+                    <td><%= presentations[i].start_date.toLocaleString("en-GB", {year: 'numeric', month: 'short', day: 'numeric', hour: 'numeric', minute: 'numeric' })%></td>
+                    <td><a href="/admin/presentation/<%=presentations[i].presentation_id%>"><i class="bi bi-pencil-square"></i></a></td>
+                    <td><a href="/admin/presentation/delete/<%=presentations[i].presentation_id%>"><i class="bi bi-trash-fill"></i></a></td>
+                </tr>
+            <%}%>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+

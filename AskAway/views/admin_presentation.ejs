@@ -1,0 +1,46 @@
+<head>
+    <!--<link rel='stylesheet' href='/stylesheets/index.css' /> -->
+    <title><%= title %></title>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row text-center">
+        <div class="col">
+            <a href="/admin/users"><button class="btn btn-primary rounded-pill my-1">Users</button></a>
+        </div>
+        <div class="col">
+            <a href="/admin/presentations"><button class="btn btn-primary rounded-pill my-1">Presentations</button></a>
+        </div>
+    </div>
+    <div class="myblock m-3">
+        <h2>Edit Presentation</h2>
+        <form class="justify-content-center align-items-center" method="post" action="/admin/presentation/<%=presentation.presentation_id%>">
+            <table class="table table-responsive">
+                <tr class="text-center">
+                    <th>Title</th>
+                    <th>Code</th>
+                    <th>Date</th>
+                </tr>
+                <tr>
+                    <td><input id="title" name="title" class="form-control rounded-pill my-2" type="text" placeholder="Title" value="<%=presentation.title%>" required></td>
+                    <td><input id="code" name="code" class="form-control rounded-pill my-2" type="text" placeholder="Presentation Code" value="<%=presentation.code%>" required></td>
+                    <td><input id="start_date" name="start_date" class="form-control rounded-pill my-2" type="datetime-local" placeholder="Start Time" value="<%=presentation.start_date%>" required></td>
+                </tr>
+            </table>
+            <button type="submit" class="btn rounded-pill btn-secondary my-2">Edit Presentation</button>
+        </form>
+    </div>
+    <h2 class="m-3">Questions</h2>
+    <% for (let i = 0; i < questions.length; i++){%>
+        <div class="myblock my-1 mx-3">
+            <p><%=questions[i].text%></p>
+            <div class="row justify-content-between align-items-end">
+                <div class="col"><i class="bi bi-heart-fill" style="color: #EB9650;"></i> <%=questions[i].likes%></div>
+                <div class="col text-end"><td><a href="/admin/question/delete/<%=questions[i].question_id%>"><i class="bi bi-trash-fill"></i></a></td></div>
+            </div>
+        </div>
+    <%}%>
+
+</div>
+</body>
+
